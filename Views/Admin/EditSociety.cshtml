@@ -1,0 +1,168 @@
+﻿@model Society_Management_System.Models.Society
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Edit Society</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI',sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/images/addhouse.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* GLASS CARD */
+
+        .form-card {
+            width: 90%;
+            max-width: 480px;
+            padding: 25px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            color: white;
+        }
+
+            /* TITLE */
+
+            .form-card h3 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        /* INPUT */
+
+        .form-control {
+            background: rgba(255,255,255,0.18);
+            border: none;
+            color: white;
+        }
+
+            .form-control::placeholder {
+                color: #ddd;
+            }
+
+            .form-control:focus {
+                background: rgba(255,255,255,0.25);
+                box-shadow: none;
+            }
+
+        /* BUTTON GROUP */
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        /* BUTTON */
+
+        .btn-soft {
+            background: linear-gradient(45deg,#00c6ff,#0072ff);
+            border: none;
+            color: white;
+        }
+
+            .btn-soft:hover {
+                transform: scale(1.05);
+            }
+
+        .text-danger {
+            color: #ffb3b3 !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="form-card">
+
+        <h3>Edit Society</h3>
+
+        <form asp-action="EditSociety" asp-controller="Admin" method="post">
+
+            <input type="hidden" asp-for="SocietyId" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-2">
+                <label>Society Name</label>
+                <input asp-for="SocietyName" class="form-control" required />
+                <span asp-validation-for="SocietyName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label>City</label>
+                <input asp-for="City" class="form-control" required />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label>Pin Code</label>
+                <input asp-for="PinCode" class="form-control" required />
+                <span asp-validation-for="PinCode" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label>Total Houses</label>
+                <input asp-for="TotalHouses" type="number" class="form-control" />
+                <span asp-validation-for="TotalHouses" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label>Address</label>
+<textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label>Image URL</label>
+                <input asp-for="Image" class="form-control" placeholder="Optional image URL" />
+            </div>
+
+            <div class="button-group">
+
+                <button type="submit" class="btn btn-soft">
+                    Update Society
+                </button>
+
+                <a asp-controller="Admin" asp-action="ViewSocieties" class="btn btn-primary">
+                    Back
+                </a>
+
+                <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary">
+                    Dashboard
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <partial name="_ValidationScriptsPartial" />
+
+</body>
+</html>

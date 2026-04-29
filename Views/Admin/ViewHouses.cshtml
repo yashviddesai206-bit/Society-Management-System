@@ -1,0 +1,193 @@
+﻿@model List<SOCITEY_MANAGEMENT.Models.House>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "House List";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI',sans-serif;
+        background: linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)),url('/images/addhouse.png');
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* GLASS CARD */
+
+    .page-card {
+        width: 95%;
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(12px);
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    /* TITLE */
+
+    .page-title {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    /* BUTTONS */
+
+    .btn-soft {
+        background: linear-gradient(45deg,#00c6ff,#0072ff);
+        border: none;
+        color: white;
+    }
+
+        .btn-soft:hover {
+            transform: scale(1.05);
+        }
+
+    /* TABLE */
+
+    .table {
+        color: white;
+    }
+
+        .table thead {
+            background: rgba(0,114,255,0.85);
+        }
+
+    .table-hover tbody tr:hover {
+        background: rgba(255,255,255,0.1);
+    }
+
+    .table-bordered {
+        border-color: rgba(255,255,255,0.3);
+    }
+
+    /* STATUS */
+
+    .status-available {
+        background: #28a745;
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    .status-allocated {
+        background: #dc3545;
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+
+</style>
+
+<div class="page-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div class="page-title">House List</div>
+
+        <div class="button-group">
+
+            <a asp-action="AddHouse" asp-controller="Admin" class="btn btn-soft">
+                Add House
+            </a>
+
+            <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-secondary">
+                Dashboard
+            </a>
+
+            <a href="/Account/Logout" class="btn btn-danger">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover text-center">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Society Id</th>
+                    <th>House Number</th>
+                    <th>Block</th>
+                    <th>Type</th>
+                    <th>Details</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="8">No Houses Found</td>
+                    </tr>
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.HouseId</td>
+                        <td>@item.SocietyId</td>
+                        <td>@item.HouseNumber</td>
+                        <td>@item.BlockNumber</td>
+                        <td>@item.HouseType</td>
+                        <td class="text-start">@item.Details</td>
+
+                        <td>
+                            @if (item.Status == "Available")
+                            {
+                                <span class="status-available">Available</span>
+                            }
+                            else
+                            {
+                                <span class="status-allocated">Allocated</span>
+                            }
+                        </td>
+
+                        <td>
+
+                            <a asp-action="EditHouse"
+                               asp-controller="Admin"
+                               asp-route-id="@item.HouseId"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <a asp-action="DeleteHouse"
+                               asp-controller="Admin"
+                               asp-route-id="@item.HouseId"
+                               class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

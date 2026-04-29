@@ -1,0 +1,124 @@
+﻿@model Society_Management_System.Models.Complaint
+
+@{
+    Layout = null;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+
+    body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI',sans-serif;
+        background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/images/addhouse.png');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* GLASS CARD */
+
+    .form-card {
+        width: 90%;
+        max-width: 480px;
+        padding: 25px;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(12px);
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        color: white;
+    }
+
+        /* TITLE */
+
+        .form-card h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+    /* INPUT */
+
+    .form-control {
+        background: rgba(255,255,255,0.18);
+        border: none;
+        color: white;
+    }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.25);
+            box-shadow: none;
+        }
+
+    /* BUTTONS */
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+    .btn-update {
+        background: linear-gradient(45deg,#00c6ff,#0072ff);
+        border: none;
+        color: white;
+    }
+
+        .btn-update:hover {
+            transform: scale(1.05);
+        }
+
+</style>
+
+<div class="form-card">
+
+    <h3>Complaint Detail</h3>
+
+    <form asp-action="EditComplaint" method="post">
+
+        <input type="hidden" asp-for="ComplaintId" />
+
+        <div class="mb-2">
+            <label>Member Id</label>
+            <input asp-for="MemberId" class="form-control" readonly />
+        </div>
+
+        <div class="mb-2">
+            <label>Complaint</label>
+<textarea asp-for="ComplaintText" class="form-control" rows="3" readonly></textarea>
+        </div>
+
+        <div class="mb-2">
+            <label>Status</label>
+            <select asp-for="Status" class="form-control">
+                <option>Pending</option>
+                <option>Under Review</option>
+                <option>Resolved</option>
+            </select>
+        </div>
+
+        <div class="mb-2">
+            <label>Admin Message</label>
+<textarea asp-for="AdminMessage" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="button-group">
+
+            <button type="submit" class="btn btn-update">
+                Update Complaint
+            </button>
+
+            <a asp-controller="Admin" asp-action="ViewComplaints" class="btn btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
